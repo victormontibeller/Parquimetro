@@ -1,6 +1,8 @@
-package com.fiap.parquimetro.cliente.entity;
+package com.fiap.parquimetro.veiculo.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fiap.parquimetro.cliente.entity.Modelo;
+import com.fiap.parquimetro.condutor.entity.Condutor;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

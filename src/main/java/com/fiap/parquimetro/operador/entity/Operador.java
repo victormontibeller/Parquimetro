@@ -1,9 +1,11 @@
-package com.fiap.parquimetro.cliente.entity;
+package com.fiap.parquimetro.operador.entity;
 
 import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fiap.parquimetro.cliente.entity.enumerations.SexoEnum;
+import com.fiap.parquimetro.condutor.entity.Endereco;
+import com.fiap.parquimetro.condutor.entity.Usuario;
+import com.fiap.parquimetro.condutor.entity.enumerations.SexoEnum;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;

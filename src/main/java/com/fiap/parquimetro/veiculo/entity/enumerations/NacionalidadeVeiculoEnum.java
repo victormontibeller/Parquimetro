@@ -1,4 +1,4 @@
-package com.fiap.parquimetro.cliente.entity.enumerations;
+package com.fiap.parquimetro.veiculo.entity.enumerations;
 
 import lombok.Getter;
 

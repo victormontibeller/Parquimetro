@@ -1,9 +1,7 @@
-package com.fiap.parquimetro.cliente.entity;
-
-import java.math.BigDecimal;
+package com.fiap.parquimetro.marca.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fiap.parquimetro.cliente.entity.enumerations.HorarioTiqueteEnum;
+import com.fiap.parquimetro.veiculo.entity.enumerations.NacionalidadeVeiculoEnum;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -20,20 +18,16 @@ import lombok.Setter;
 @Setter
 
 @Entity
-@Table(name = "preco")
+@Table(name = "marca")
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-public class Preco {
+public class Marca {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    
     @Column(nullable = false)
-    private BigDecimal precoPeriodo;
+    private String nome;
 
-    @Column(nullable = false)
-    private BigDecimal precoHoraExcedente;
-
-    @Column(nullable = false)
-    @Enumerated(EnumType.ORDINAL)
-    private HorarioTiqueteEnum periodo;
+    @Enumerated(EnumType.STRING)
+    NacionalidadeVeiculoEnum pais;
 }
