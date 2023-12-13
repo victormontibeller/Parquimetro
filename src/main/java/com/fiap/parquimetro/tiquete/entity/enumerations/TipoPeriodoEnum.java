@@ -1,6 +1,6 @@
 package com.fiap.parquimetro.tiquete.entity.enumerations;
 
-public enum TipoTiqueteEnum {
+public enum TipoPeriodoEnum {
     
     FIXO,
     VARIAVEL;

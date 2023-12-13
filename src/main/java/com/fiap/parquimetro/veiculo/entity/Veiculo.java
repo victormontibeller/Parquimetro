@@ -21,6 +21,9 @@ import lombok.Setter;
 public class Veiculo {
    @Id
    @Column(unique = true)
+   private Long id;
+
+   @Column(nullable = false)
    private String placa;
 
    @Column(nullable = false)
@@ -29,7 +32,7 @@ public class Veiculo {
    @ManyToOne
    private Modelo modelo;
 
-   @Column(nullable = false)
+   @ManyToOne
    private Condutor condutor;
     
 }

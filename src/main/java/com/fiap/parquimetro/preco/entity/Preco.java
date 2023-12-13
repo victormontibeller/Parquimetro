@@ -36,4 +36,6 @@ public class Preco {
     @Column(nullable = false)
     @Enumerated(EnumType.ORDINAL)
     private HorarioTiqueteEnum periodo;
+
+
 }

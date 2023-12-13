@@ -1,14 +1,11 @@
 package com.fiap.parquimetro.condutor.entity;
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fiap.parquimetro.cliente.entity.Endereco;
 import com.fiap.parquimetro.cliente.entity.Usuario;
 import com.fiap.parquimetro.cliente.entity.enumerations.SexoEnum;
-import com.fiap.parquimetro.veiculo.entity.Veiculo;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
@@ -17,7 +14,6 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -33,7 +29,7 @@ public class Condutor {
 
    @Id
    @Column(unique = true)
-   private long numeroCnh;
+   private Long numeroCnh;
 
    @Column(nullable = false)
    private LocalDate dataNascimento;
@@ -45,10 +41,10 @@ public class Condutor {
    private SexoEnum sexo;
 
    @Column(nullable = false, unique = true)
-   private long CPF;
+   private Long CPF;
 
    @Column(nullable = false)
-   private long telefone;
+   private String telefone;
 
    @Embedded
    private Endereco endereco;
@@ -56,8 +52,5 @@ public class Condutor {
    @OneToOne
    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
    private Usuario usuario;
-
-   @ManyToMany(mappedBy = "condutores")
-   private Set<Veiculo> veiculos = new HashSet<>();
 
 }
