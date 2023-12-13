@@ -30,24 +30,24 @@ public class CondutorController {
     }
 
     @PostMapping
-    public ResponseEntity<CondutorDTO> inserirCliente(@RequestBody CondutorDTO condutor) {
+    public ResponseEntity<CondutorDTO> inserirCondutor(@RequestBody CondutorDTO condutor) {
         CondutorDTO condutorSalvo = condutorService.inserirCondutor(condutor);
 
         return new ResponseEntity<>(condutorSalvo, HttpStatus.CREATED);
     }
 
     @GetMapping("/{numeroCnh}")
-    public ResponseEntity<CondutorDTO> buscarCliente(@PathVariable long numeroCnh) {
+    public ResponseEntity<CondutorDTO> buscarCondutor(@PathVariable long numeroCnh) {
         return ResponseEntity.ok().body(condutorService.encontrarCondutor(numeroCnh));
     }
 
     @PutMapping("/{numeroCnh}")
-    public ResponseEntity<CondutorDTO> atualizarCliente(@PathVariable long numeroCnh, @RequestBody CondutorDTO condutorDTO) {
+    public ResponseEntity<CondutorDTO> atualizarCondutor(@PathVariable long numeroCnh, @RequestBody CondutorDTO condutorDTO) {
         return ResponseEntity.ok().body(condutorService.alterarCondutor(condutorDTO, numeroCnh));
     }
 
     @DeleteMapping("/{numeroCnh}")
-    public ResponseEntity<String> deletarCliente(@PathVariable long numeroCnh) {
+    public ResponseEntity<String> deletarCondutor(@PathVariable long numeroCnh) {
         try {
             condutorService.deletarCondutor(numeroCnh);
             LOGGER.info("Condutor {} eliminado com sucesso!", numeroCnh);

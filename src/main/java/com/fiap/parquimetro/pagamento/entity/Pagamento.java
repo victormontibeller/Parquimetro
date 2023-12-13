@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fiap.parquimetro.preco.entity.Preco;
-import com.fiap.parquimetro.tiquete.entity.enumerations.TipoPeriodoEnum;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

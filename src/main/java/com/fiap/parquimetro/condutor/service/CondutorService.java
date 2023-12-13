@@ -3,23 +3,19 @@ package com.fiap.parquimetro.condutor.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.fiap.parquimetro.cliente.entity.Endereco;
-import com.fiap.parquimetro.cliente.entity.Usuario;
+import com.fiap.parquimetro.condutor.entity.Endereco;
+import com.fiap.parquimetro.condutor.entity.Usuario;
 import com.fiap.parquimetro.condutor.DTO.CondutorDTO;
 import com.fiap.parquimetro.condutor.DTO.UsuarioDTO;
 import com.fiap.parquimetro.condutor.entity.Condutor;
 import com.fiap.parquimetro.condutor.repository.CondutorRepository;
 import com.fiap.parquimetro.endereco.DTO.EnderecoDTO;
-import com.fiap.parquimetro.endereco.service.EnderecoService;
 
 @Service
 public class CondutorService {
 
     @Autowired
     CondutorRepository condutorRepository;
-
-    @Autowired
-    EnderecoService enderecoService;
 
     public CondutorService(CondutorRepository condutorRepository) {
         this.condutorRepository = condutorRepository;
@@ -56,16 +52,12 @@ public class CondutorService {
     }
 
     private CondutorDTO toDTO(Condutor condutor) {
-        //Endereco endereco = new Endereco();
-        //endereco = condutor.getEndereco();
         
         EnderecoDTO enderecoDTO = new EnderecoDTO(
                 condutor.getEndereco().getRua(), condutor.getEndereco().getNumero(), condutor.getEndereco().getBairro(),
                 condutor.getEndereco().getCidade(), condutor.getEndereco().getEstado(),
                 condutor.getEndereco().getPais(), condutor.getEndereco().getCep());
                  
-        //EnderecoDTO enderecoDTO = enderecoService.toDTO(endereco);
-
         UsuarioDTO usuarioDTO = new UsuarioDTO(condutor.getUsuario().getId(), null, null, null, null);
 
         return new CondutorDTO(
@@ -101,7 +93,7 @@ public class CondutorService {
         endereco.setPais(condutorDTO.endereco().pais());
         endereco.setCep(condutorDTO.endereco().cep());
          
-        //condutor.setEndereco(endereco.toDTO(endereco));
+        condutor.setEndereco(endereco);
 
         // Convertendo UsuarioDTO para Usuario
         Usuario usuario = new Usuario();

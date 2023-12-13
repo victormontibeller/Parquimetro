@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fiap.parquimetro.condutor.entity.Condutor;
 import com.fiap.parquimetro.preco.entity.Preco;
 import com.fiap.parquimetro.tiquete.entity.enumerations.StatusTiqueteEnum;
-import com.fiap.parquimetro.tiquete.entity.enumerations.TipoPeriodoEnum;
+import com.fiap.parquimetro.tiquete.entity.enumerations.TipoTiqueteEnum;
 import com.fiap.parquimetro.veiculo.entity.Veiculo;
 
 import jakarta.persistence.Column;
@@ -48,11 +48,11 @@ public class Tiquete {
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private TipoPeriodoEnum tipo;
+    private TipoTiqueteEnum tipo;
 
     @Column(nullable = false)
     @Enumerated(EnumType.ORDINAL)
-    private TipoPeriodoEnum periodo;
+    private TipoTiqueteEnum periodo;
 
     @Column(nullable = false)
     private Preco preco;
