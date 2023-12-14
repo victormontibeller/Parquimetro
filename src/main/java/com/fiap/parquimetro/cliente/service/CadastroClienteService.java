@@ -19,13 +19,13 @@ public class CadastroClienteService {
     }
 
     //read
-    public Cliente encontrarCliente(long numeroCnh) {
-        return clienteRepository.getReferenceById(numeroCnh);
+    public Cliente encontrarCliente(long cpf) {
+        return clienteRepository.getReferenceById(cpf);
     } 
 
     //update
-    public Cliente alterarCliente(AtualizarClienteDTO atualizaCliente, long numeroCnh) {
-        Cliente cliente = clienteRepository.getReferenceById(numeroCnh);
+    public Cliente alterarCliente(AtualizarClienteDTO atualizaCliente, long cpf) {
+        Cliente cliente = clienteRepository.getReferenceById(cpf);
         cliente.getUsuario().setNome(atualizaCliente.nome());
         cliente.setEndereco(atualizaCliente.endereco());
 
@@ -33,7 +33,7 @@ public class CadastroClienteService {
     }
 
     //delete
-    public void deletarCliente(long numeroCnh) {
-        clienteRepository.deleteById(numeroCnh);
+    public void deletarCliente(long cpf) {
+        clienteRepository.deleteById(cpf);
     }
 }

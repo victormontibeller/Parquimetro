@@ -33,7 +33,7 @@ public class ClienteController {
     public ResponseEntity<Cliente> inserirCliente(@RequestBody Cliente cliente, UriComponentsBuilder builder) {
         clienteService.inserirCliente(cliente);
 
-        URI location = builder.path("clientes/{numeroCnh}").buildAndExpand(cliente.getNumeroCnh()).toUri();
+        URI location = builder.path("clientes/{numeroCpf}").buildAndExpand(cliente.getCPF()).toUri();
         return ResponseEntity.created(location).body(cliente);
     }
 
