@@ -21,7 +21,6 @@ public class PagamentoService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PagamentoService.class);
 
-
     //create
     public Pagamento inserirPagamento(Pagamento pagamento) throws Exception{
         /* ***melhorar*** - Antes de usar o sistema, o condutor deve registrar sua forma de pagamento preferida, que pode incluir
@@ -32,7 +31,6 @@ public class PagamentoService {
             if(TipoPagamentoEnum.PIX == pagamento.getTipoPagamento()){
                 throw new Exception("pagamento só poderá ser feito via crédito ou débito");       
             }
-            //float valor = 
             pagamento.setValor(calcularValor(pagamento.getHoraEntrada(), 
                                              pagamento.getHoraSaida(), 
                                              listaPrecosEnum.AVULSO.getPreco()));
