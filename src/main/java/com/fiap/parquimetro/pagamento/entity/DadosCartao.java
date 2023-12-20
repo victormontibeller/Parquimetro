@@ -37,5 +37,4 @@ public class DadosCartao {
     @ManyToMany(mappedBy = "cartao")
     private List<Condutor> condutor;
 
-
 }

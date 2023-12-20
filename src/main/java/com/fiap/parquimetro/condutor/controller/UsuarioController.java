@@ -17,6 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.fiap.parquimetro.condutor.DTO.AtualizarUsuarioDTO;
+import com.fiap.parquimetro.condutor.entity.Usuario;
+import com.fiap.parquimetro.condutor.service.CadastroUsuarioService;
+
 
 @RestController
 @RequestMapping(value = "/usuarios")

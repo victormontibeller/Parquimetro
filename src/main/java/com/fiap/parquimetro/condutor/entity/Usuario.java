@@ -1,7 +1,7 @@
 package com.fiap.parquimetro.condutor.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fiap.parquimetro.cliente.entity.enumerations.TipoUsuarioEnum;
+import com.fiap.parquimetro.condutor.entity.enumerations.TipoUsuarioEnum;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
