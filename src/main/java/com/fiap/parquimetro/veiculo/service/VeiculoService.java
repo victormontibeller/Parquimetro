@@ -2,10 +2,10 @@ package com.fiap.parquimetro.veiculo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.fiap.parquimetro.cliente.entity.Modelo;
 import com.fiap.parquimetro.condutor.DTO.CondutorDTO;
 import com.fiap.parquimetro.condutor.entity.Condutor;
 import com.fiap.parquimetro.modelo.DTO.ModeloDTO;
+import com.fiap.parquimetro.modelo.entity.Modelo;
 import com.fiap.parquimetro.veiculo.DTO.VeiculoDTO;
 import com.fiap.parquimetro.veiculo.entity.Veiculo;
 import com.fiap.parquimetro.veiculo.repository.VeiculoRepository;
