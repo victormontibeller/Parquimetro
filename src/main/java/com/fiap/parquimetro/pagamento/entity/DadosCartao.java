@@ -35,7 +35,6 @@ public class DadosCartao {
     private LocalDate validade;
 
     @ManyToMany(mappedBy = "cartao")
-    private List<Condutor> clientes;
-
+    private List<Condutor> condutor;
 
 }
