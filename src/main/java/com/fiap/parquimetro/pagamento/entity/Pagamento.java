@@ -3,7 +3,7 @@ package com.fiap.parquimetro.pagamento.entity;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import com.fiap.parquimetro.cliente.entity.Cliente;
+import com.fiap.parquimetro.condutor.entity.Condutor;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -37,7 +37,7 @@ public class Pagamento {
      
     @ManyToOne
     @JoinColumn(name = "cliente_id")
-    private Cliente cliente;
+    private Condutor condutor;
     
     @ManyToOne
     @JoinColumn(name = "cartaoId")
