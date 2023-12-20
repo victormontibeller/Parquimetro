@@ -1,51 +1,46 @@
 package com.fiap.parquimetro.pagamento.entity;
 
-import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fiap.parquimetro.preco.entity.Preco;
+import com.fiap.parquimetro.condutor.entity.Condutor;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-
-@Entity
-@Table(name = "pagamento")
-@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+@Entity(name = "pagamento")
 public class Pagamento {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
-    @Enumerated(EnumType.ORDINAL)
-    private TipoPeriodoEnum tipoPeriodo;
+    private float valor;
 
+    private LocalDate dataPagamento;
+
+    private LocalTime horaEntrada;
+
+    private LocalTime horaSaida;
+
+    private TipoPagamentoEnum tipoPagamento; 
+
+    private boolean periodoFixo; // periodo poderá ser fixo, ou  poderá ser avulso
+     
     @ManyToOne
-    private Preco preco;
+    @JoinColumn(name = "cliente_id")
+    private Condutor condutor;
+    
+    @ManyToOne
+    @JoinColumn(name = "cartaoId")
+    private DadosCartao dadosCartao;
 
-    // Outros campos, construtores, getters e setters
-
-    public BigDecimal calcularCustoEstacionamento() {
-        return null;
-        /*BigDecimal custo = preco.getPrecoPorHora();
-
-        if (tipoPeriodo != tipoPeriodo.UMA_HORA) {
-            BigDecimal valorHorasExcedentes = preco.getPrecoHoraExcedente()
-                    .multiply(BigDecimal.valueOf(tipoPeriodo.getHoras() - 1));
-            custo = custo.add(valorHorasExcedentes);
-        }
-
-        return custo;*/
-    }
 }
