@@ -1,0 +1,8 @@
+### Testar o Parquimetro
+POST http://localhost:8080/marcas
+content-type: application/json
+
+{
+    "nome" : "CHERY",
+    "pais" : "CHINA"
+}

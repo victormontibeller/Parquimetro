@@ -1,8 +1,11 @@
 package com.fiap.parquimetro.marca.DTO;
 
+import com.fiap.parquimetro.veiculo.entity.enumerations.NacionalidadeVeiculoEnum;
+
 public record MarcaDTO(
     Long id,
     String nome, 
-    Long marca_id
-){    
+    NacionalidadeVeiculoEnum pais
+){
+
 }

@@ -1,0 +1,28 @@
+### Testar o Parquimetro
+POST http://localhost:8080/condutores
+content-type: application/json
+
+{
+  "numeroCnh": 123456789,
+  "dataNascimento": "1990-01-15",
+  "email": "condutor@example.com",
+  "sexo": "MASCULINO",
+  "CPF": 12345678901,
+  "telefone": "987654321",
+  "endereco": {
+    "rua": "Rua da Amostra",
+    "numero": 123,
+    "bairro": "Centro",
+    "cidade": "Cidade",
+    "estado": "UF",
+    "pais": "Brasil",
+    "cep": 12345678
+  },
+  "usuario": {
+    "id": 1,
+    "login": "usuario",
+    "senha": "senha",
+    "nome": "Nome do Usuário",
+    "tipoUsuario": "CLIENTE"
+  }
+}
