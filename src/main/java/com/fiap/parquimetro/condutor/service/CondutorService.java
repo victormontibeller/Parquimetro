@@ -1,5 +1,7 @@
 package com.fiap.parquimetro.condutor.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,11 @@ public class CondutorService {
     public CondutorService(CondutorRepository condutorRepository) {
         this.condutorRepository = condutorRepository;
     }
+    
+    //read all
+    public List<Condutor> buscarCondutores() {
+        return condutorRepository.findAll();
+    } 
 
     // add
     public CondutorDTO inserirCondutor(CondutorDTO condutorDTO) {

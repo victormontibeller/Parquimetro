@@ -1,5 +1,7 @@
 package com.fiap.parquimetro.condutor.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fiap.parquimetro.condutor.DTO.CondutorDTO;
+import com.fiap.parquimetro.condutor.entity.Condutor;
 import com.fiap.parquimetro.condutor.service.CondutorService;
 
 @RestController
@@ -27,6 +30,11 @@ public class CondutorController {
 
     public CondutorController(CondutorService condutorService) {
         this.condutorService = condutorService;
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Condutor>> buscarCondutores() {
+        return ResponseEntity.ok().body(condutorService.buscarCondutores());
     }
 
     @PostMapping

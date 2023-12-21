@@ -55,10 +55,10 @@ public class Tiquete {
     private TipoTiqueteEnum periodo;
 
     @Column(nullable = false)
-    private Preco preco;
-
-    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private StatusTiqueteEnum status;
 
+    @ManyToOne
+    @JoinColumn(name = "preco_id")
+    private Preco preco;
 }
