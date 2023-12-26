@@ -7,12 +7,13 @@ import com.fiap.parquimetro.condutor.entity.enumerations.SexoEnum;
 import java.time.LocalDate;
 
 public record OperadorDTO(
-        Long matricula,
+        long id,
+        long matricula,
         LocalDate dataNascimento,
         String email,
         SexoEnum sexo,
-        Long CPF,
-        Long telefone,
+        long CPF,
+        long telefone,
         EnderecoDTO endereco,
         UsuarioDTO usuario
 ) {
