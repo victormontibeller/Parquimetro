@@ -25,7 +25,7 @@ import com.fiap.parquimetro.condutor.service.CondutorService;
 public class CondutorController {
 
     @Autowired
-    public final CondutorService condutorService;
+    private final CondutorService condutorService;
     private static final Logger LOGGER = LoggerFactory.getLogger(CondutorController.class);
 
     public CondutorController(CondutorService condutorService) {

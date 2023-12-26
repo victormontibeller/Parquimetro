@@ -15,11 +15,7 @@ import com.fiap.parquimetro.operador.repository.OperadorRepository;
 
 public class OperadorService {
     @Autowired
-    OperadorRepository operadorRepository;
-
-    public OperadorService(OperadorRepository operadorRepository) {
-        this.operadorRepository = operadorRepository;
-    }
+    private OperadorRepository operadorRepository;
 
     // add
     public OperadorDTO inserirOperador(OperadorDTO operadorDTO) {

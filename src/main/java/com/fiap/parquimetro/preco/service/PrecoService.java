@@ -14,7 +14,7 @@ import com.fiap.parquimetro.preco.repository.PrecoRepository;
 public class PrecoService {
 
     @Autowired
-    PrecoRepository precoRepository;
+    private PrecoRepository precoRepository;
 
     // read all
     public List<Preco> buscarPrecos() {
