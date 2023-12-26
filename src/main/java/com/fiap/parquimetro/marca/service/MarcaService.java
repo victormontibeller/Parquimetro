@@ -17,12 +17,12 @@ public class MarcaService {
     MarcaRepository marcaRepository;
 
     // read all
-    public List<Marca> findAll() {
+    public List<Marca> buscarMarcas() {
         return marcaRepository.findAll();
     }
 
     // read
-    public Optional<Marca> encontrarMarca(Long id) {
+    public Optional<Marca> buscarMarca(Long id) {
         return marcaRepository.findById(id);
     }
 
@@ -30,12 +30,27 @@ public class MarcaService {
     public MarcaDTO inserirMarca(MarcaDTO marcaDTO) {
         Marca marca = toEntity(marcaDTO);
 
-        // Salva o novo Condutor no repositório
+        // Salva a nova Marca no repositório
         marca = marcaRepository.save(marca);
 
-        // Retorna o novo condutor
+        // Retorna a nova marca
         return toDTO(marca);
     }
+
+    // update
+    public MarcaDTO alterarMarca(MarcaDTO marcaDTO, long id) {
+        Marca marca = marcaRepository.getReferenceById(id);
+
+        marca = marcaRepository.save(toEntity(marcaDTO));
+
+        return toDTO(marca);
+    }
+
+    // delete
+    public void deletarMarca(long id) {
+        marcaRepository.deleteById(id);
+    }
+
 
     private MarcaDTO toDTO(Marca marca) {
         return new MarcaDTO(

@@ -1,5 +1,8 @@
 package com.fiap.parquimetro.veiculo.service;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.fiap.parquimetro.condutor.DTO.CondutorDTO;
@@ -29,14 +32,19 @@ public class VeiculoService {
         return toDTO(veiculo);
     }
 
+    // read all
+    public List<Veiculo> buscarVeiculos() {
+        return veiculoRepository.findAll();
+    }
+
     // read
-    public VeiculoDTO encontrarVeiculo(long numeroCnh) {
-        return toDTO(veiculoRepository.getReferenceById(numeroCnh));
+    public Optional<Veiculo> buscarVeiculo(Long id) {
+        return veiculoRepository.findById(id);
     }
 
     // update
-    public VeiculoDTO alterarVeiculo(VeiculoDTO veiculoDTO, long numeroCnh) {
-        Veiculo veiculo = veiculoRepository.getReferenceById(numeroCnh);
+    public VeiculoDTO alterarVeiculo(VeiculoDTO veiculoDTO, long id) {
+        Veiculo veiculo = veiculoRepository.getReferenceById(id);
 
         veiculo = veiculoRepository.save(toEntity(veiculoDTO));
 

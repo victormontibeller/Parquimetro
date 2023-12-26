@@ -3,7 +3,6 @@ package com.fiap.parquimetro.tiquete.entity;
 import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fiap.parquimetro.condutor.entity.Condutor;
 import com.fiap.parquimetro.preco.entity.Preco;
 import com.fiap.parquimetro.tiquete.entity.enumerations.StatusTiqueteEnum;
 import com.fiap.parquimetro.tiquete.entity.enumerations.TipoTiqueteEnum;
@@ -32,10 +31,6 @@ public class Tiquete {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @ManyToOne
-    @JoinColumn(name = "condutor_id")
-    private Condutor condutor;
 
     @ManyToOne
     @JoinColumn(name = "veiculo_id")
