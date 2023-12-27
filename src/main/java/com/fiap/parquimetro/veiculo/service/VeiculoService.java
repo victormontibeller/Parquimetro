@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.fiap.parquimetro.condutor.DTO.CondutorDTO;
 import com.fiap.parquimetro.condutor.entity.Condutor;
@@ -13,6 +14,7 @@ import com.fiap.parquimetro.veiculo.DTO.VeiculoDTO;
 import com.fiap.parquimetro.veiculo.entity.Veiculo;
 import com.fiap.parquimetro.veiculo.repository.VeiculoRepository;
 
+@Service
 public class VeiculoService {
     @Autowired
     VeiculoRepository veiculoRepository;

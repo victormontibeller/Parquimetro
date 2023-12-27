@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.fiap.parquimetro.condutor.DTO.UsuarioDTO;
 import com.fiap.parquimetro.condutor.entity.Endereco;
@@ -13,9 +14,20 @@ import com.fiap.parquimetro.operador.DTO.OperadorDTO;
 import com.fiap.parquimetro.operador.entity.Operador;
 import com.fiap.parquimetro.operador.repository.OperadorRepository;
 
+@Service
 public class OperadorService {
     @Autowired
-    private OperadorRepository operadorRepository;
+    OperadorRepository operadorRepository;
+
+    // read all
+    public List<Operador> buscarOperadores() {
+        return operadorRepository.findAll();
+    }
+
+    // read
+    public Optional<Operador> buscarOperador(Long id) {
+        return operadorRepository.findById(id);
+    }
 
     // add
     public OperadorDTO inserirOperador(OperadorDTO operadorDTO) {
@@ -26,16 +38,6 @@ public class OperadorService {
 
         // Retorna o novo operador
         return toDTO(operador);
-    }
-
-    // read all
-    public List<Operador> buscarOperadores() {
-        return operadorRepository.findAll();
-    }
-
-    // read
-    public Optional<Operador> buscarOperador(Long id) {
-        return operadorRepository.findById(id);
     }
 
     // update
