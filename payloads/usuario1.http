@@ -1,0 +1,10 @@
+### Testar o Parquimetro
+POST http://localhost:8080/usuarios
+content-type: application/json
+
+{
+    "login": "usuario",
+    "senha": "senha",
+    "nome": "Nome do Usuário",
+    "tipoUsuario": "CLIENTE"
+  }
