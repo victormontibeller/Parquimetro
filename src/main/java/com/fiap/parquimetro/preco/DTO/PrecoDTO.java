@@ -9,7 +9,7 @@ public record PrecoDTO(
         Long id,
         BigDecimal precoPeriodo,
         BigDecimal precoHoraExcedente,
-        HorarioTiqueteEnum periodo,
+        String periodo,
         Tiquete tiquete
 ) {
   
