@@ -1,8 +1,17 @@
 package com.fiap.parquimetro.pagamento.entity;
 
+import lombok.Getter;
+
+@Getter
 public enum TipoPagamentoEnum {
-    DEBITO,
-    CRÉDITO,
-    PIX,
-    BITCOIN
-}   
+    DEBITO("DEBITO"),
+    CREDITO("CREDITO"),
+    PIX("PIX"),
+    BITCOIN("BITCOIN"); 
+
+private final String descricao;
+
+    TipoPagamentoEnum(String descricao){
+        this.descricao = descricao;
+    }
+}

@@ -4,13 +4,15 @@ import lombok.Getter;
 
 @Getter
 public enum listaPrecosEnum {
-    FIXO(10f),
-    AVULSO(15f);
+    FIXO(10f, "FIXO"),
+    AVULSO(15f,"AVULSO");
 
     private final float preco;
+    private final String descricao;
 
-    listaPrecosEnum(float preco){
+    listaPrecosEnum(float preco, String descricao){
         this.preco = preco;
+        this.descricao = descricao;
     }
 
 }

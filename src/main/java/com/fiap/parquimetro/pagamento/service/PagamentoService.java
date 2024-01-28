@@ -1,17 +1,20 @@
 package com.fiap.parquimetro.pagamento.service;
 
-import java.time.LocalTime;
-import java.time.temporal.ChronoUnit;
+import java.util.List;
+import java.util.Optional;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fiap.parquimetro.pagamento.DTO.PagamentoDTO;
 import com.fiap.parquimetro.pagamento.entity.Pagamento;
 import com.fiap.parquimetro.pagamento.entity.TipoPagamentoEnum;
 import com.fiap.parquimetro.pagamento.entity.listaPrecosEnum;
 import com.fiap.parquimetro.pagamento.repository.PagamentoRepository;
+import com.fiap.parquimetro.tiquete.entity.Tiquete;
+import com.fiap.parquimetro.tiquete.entity.enumerations.StatusTiqueteEnum;
+
+import lombok.NonNull;
 
 @Service
 public class PagamentoService {
@@ -19,59 +22,121 @@ public class PagamentoService {
     @Autowired
     private PagamentoRepository pagamentoRepository;
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(PagamentoService.class);
-
     //create
-    public Pagamento inserirPagamento(Pagamento pagamento) throws Exception{
-        /* ***melhorar*** - Antes de usar o sistema, o condutor deve registrar sua forma de pagamento preferida, que pode incluir
-        cartão de crédito, débito ou PIX.
-        - A opção PIX só está disponível para períodos de estacionamento fixos.*/
-
-        if(!pagamento.isPeriodoFixo()){ 
-            if(TipoPagamentoEnum.PIX == pagamento.getTipoPagamento()){
-                throw new Exception("pagamento só poderá ser feito via crédito ou débito");       
-            }
-            pagamento.setValor(calcularValor(pagamento.getHoraEntrada(), 
-                                             pagamento.getHoraSaida(), 
-                                             listaPrecosEnum.AVULSO.getPreco()));
-        } else {
-            pagamento.setValor(calcularValor(pagamento.getHoraEntrada(), 
-                                             pagamento.getHoraSaida(), 
-                                             listaPrecosEnum.FIXO.getPreco()));
+    public PagamentoDTO inserirPagamento(PagamentoDTO pagamentoDTO, 
+                                            @NonNull Long tiqueteId) throws Exception{
+        Pagamento pagamento = toEntity(pagamentoDTO);
+        if(pagamento == null){
+            throw new Exception("valor do pagamento é nulo");       
         }
-        return pagamentoRepository.save(pagamento);
+
+        calcularInformacoesPagamento(pagamento);
+            Tiquete tiquete = preencherTiquete(pagamento);
+
+        pagamento = pagamentoRepository.save(pagamento);
+
+        return toDTO(pagamento);
     }
 
     //read
-    public Pagamento encontrarPagamento(Long id) {
-        return pagamentoRepository.getReferenceById(id);
+    @NonNull 
+    public Optional<Pagamento> encontrarPagamento(Long id) {
+        return pagamentoRepository.findById(id);
     } 
 
-    /*update
-    possibilidade de que caso o periodo seja fixo, o 
-    pagamento deverá ser realizado até o limite do periodo + uma tolerância. 
-    */
-
-    /*delete
-    não vejo sentido em ter um delete de pagamento, 
-    dado que, se foi pago isso não poderá ser alterado no sistema
-    */
-
-    public float calcularValor(LocalTime horaEntrada, LocalTime horaSaida, float precoHora) {
-        float tempo = calcularPeriodo(horaEntrada, horaSaida);
-        return tempo * precoHora;
+    //read all
+    public List<Pagamento> findAll(){
+        return pagamentoRepository.findAll();
     }
 
-    public float calcularPeriodo(LocalTime horaEntrada, LocalTime horaSaida) {
-        float segundos = ChronoUnit.SECONDS.between(horaEntrada, horaSaida);
-        float horas = segundos / 3600;
-        float minutos = (segundos % 3600) / 60;
-        float segundosFinais = segundos % 60;
+    /**
+     * Calcula as informações de pagamento com base no objeto Pagamento fornecido.
+     *
+     * @param  pagamento  o objeto Pagamento contendo as informações necessárias
+     * @throws Exception  se ocorrer um erro durante o cálculo das informações de pagamento
+     */
+    void calcularInformacoesPagamento(Pagamento pagamento) throws Exception{
+        final String quantidadeHoras = pagamento.getQuantidadeHoras(pagamento.getHoraEntrada(), 
+                                                                    pagamento.getHoraSaida());
+        pagamento.setQuantidadeHoras(quantidadeHoras);
 
-        LOGGER.info("tempo de estacionamento total: [{}h{}m{}s]", horas, minutos, segundosFinais);
-
-        return segundos / 3600;
+        if(!pagamento.isPeriodoFixo()){ 
+            if(TipoPagamentoEnum.PIX.getDescricao() == pagamento.getTipoPagamento()){
+                throw new Exception("pagamento só poderá ser feito via crédito ou débito");       
+            }
+            pagamento.setValor(pagamento.calcularValor(pagamento.getHoraEntrada(), 
+                                             pagamento.getHoraSaida(), 
+                                             listaPrecosEnum.AVULSO.getPreco()));
+        } else {
+            pagamento.setValor(pagamento.calcularValor(pagamento.getHoraEntrada(), 
+                                             pagamento.getHoraSaida(), 
+                                             listaPrecosEnum.FIXO.getPreco()));
+        }
     }
 
+    /**
+     * Converts Pagamento object to PagamentoDTO object.
+     *
+     * @param  pagamento  the Pagamento object to be converted
+     * @return            the PagamentoDTO object
+     */
+    public PagamentoDTO toDTO(Pagamento pagamento){
+        return new PagamentoDTO(
+            pagamento.getId(), 
+            pagamento.getTiquete().getId(), 
+            pagamento.getValor(), 
+            pagamento.getDataPagamento(), 
+            pagamento.getHoraEntrada(), 
+            pagamento.getHoraSaida(), 
+            pagamento.getTipoPagamento(), 
+            pagamento.getQuantidadeHoras(), 
+            pagamento.getTarifaDescricao(),
+            pagamento.getCondutor(),
+            pagamento.getDadosCartao(), 
+            pagamento.getTiquete()
+            );
+    }
+    /**
+     * Converts PagamentoDTO to Pagamento entity.
+     *
+     * @param  pagamentoDTO  the PagamentoDTO to be converted
+     * @return               the Pagamento entity
+     */
+    private Pagamento toEntity(PagamentoDTO pagamentoDTO){
+        Pagamento pagamento = new Pagamento();
+        pagamento.setId(pagamentoDTO.id());
+        pagamento.setValor(pagamentoDTO.valor());
+        pagamento.setDataPagamento(pagamentoDTO.dataPagamento());
+        pagamento.setHoraEntrada(pagamentoDTO.horaEntrada());
+        pagamento.setHoraSaida(pagamentoDTO.horaSaida());
+        pagamento.setTarifaDescricao(pagamentoDTO.tarifaDescricao());
+        pagamento.setQuantidadeHoras(pagamentoDTO.quantidadeHoras());
+        pagamento.setTipoPagamento(pagamentoDTO.tipoPagamento());
+        pagamento.setCondutor(pagamentoDTO.condutor());
+        pagamento.setDadosCartao(pagamentoDTO.dadosCartao());
 
+        return pagamento;
+    }
+    
+    /**
+     * preencherTiquete - Fills out a tiquete based on the given payment information.
+     *
+     * @param  pagamento   the payment information to fill the tiquete with
+     * @return             the filled out tiquete
+     */
+    public Tiquete preencherTiquete(Pagamento pagamento){
+        //tiquete.setVeiculo(null);
+        Tiquete tiquete = new Tiquete();
+        tiquete.setCondutor(pagamento.getCondutor());
+        tiquete.setEntrada(pagamento.getHoraEntrada());
+        tiquete.setSaida(pagamento.getHoraSaida());
+        tiquete.setDescricaoTarifa(pagamento.getTarifaDescricao());
+        tiquete.setPeriodo(pagamento.getQuantidadeHoras());
+        tiquete.setPreco(Float.toString(pagamento.getValor()));
+        tiquete.setTipoPagamento(pagamento.getTipoPagamento());
+        tiquete.setStatus(StatusTiqueteEnum.PAGO);
+        tiquete.setPagamentos(pagamento);   
+    
+        return tiquete;
+    }
 }

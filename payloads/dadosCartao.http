@@ -1,0 +1,34 @@
+
+
+### Testar o Parquimetro
+POST http://localhost:8080/cartao
+content-type: application/json
+
+{
+    "dadosCartao": {   
+    "cartaoId": 123,
+    "nome": "Nome do Titular",
+    "sobrenome": "Sobrenome do Titular",
+    "numeroCartao": "1234-5678-9101-1121",
+    "codSeguranca": 123,
+    "bandeira": "VISA",
+    "validade": "2023-12-31",
+    "condutor": {
+      "numeroCnh": 123456789,
+      "dataNascimento": "1990-01-15",
+      "email": "condutor@example.com",
+      "sexo": "MASCULINO",
+      "CPF": 12345678901,
+      "telefone": "987654321",
+      "endereco": {
+          "rua": "Rua da Amostra",
+          "numero": 123,
+          "bairro": "Centro",
+          "cidade": "Cidade",
+          "estado": "UF",
+          "pais": "Brasil",
+          "cep": 12345678
+      }
+    }
+  }
+}

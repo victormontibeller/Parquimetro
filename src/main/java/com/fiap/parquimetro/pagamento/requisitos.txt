@@ -10,29 +10,13 @@ OK - A opção PIX só está disponível para períodos de estacionamento fixos.
 OK - Os condutores têm a opção de pagar pelo estacionamento de várias maneiras, incluindo cartão de crédito,
 débito ou PIX, dependendo da forma de pagamento registrada.
 
-- A cobrança é baseada no tempo utilizado; para tempos fixos, o valor total é cobrado independentemente do
+OK - A cobrança é baseada no tempo utilizado; para tempos fixos, o valor total é cobrado independentemente do
 tempo real utilizado, enquanto para períodos variáveis, a cobrança é por hora completa.
 
 6. Emissão de Recibos
 
-- O sistema emite recibos automaticamente sempre que o tempo de estacionamento é encerrado e a
+OK - O sistema emite recibos automaticamente sempre que o tempo de estacionamento é encerrado e a
 cobrança é realizada.
 
-- Os recibos fornecem informações detalhadas, incluindo o tempo estacionado, a tarifa aplicada e o valor
+OK - Os recibos fornecem informações detalhadas, incluindo o tempo estacionado, a tarifa aplicada e o valor
 total pago.
-
-
-
-//------------------  TODO
-
-- CRIAR OS REPOSITORIES
- ISSO AQUI É UMA INTERFACE, E EXTEND JPAREPOSITORY
-    - Pagamento 
-    - DadosCartao
-
-.
-- CRIAR OS SERVICES
-    @SERVICES
-    (AQUI SÃO INCLUIDAS AS REGRAS DE NEGOCIO)
-
-- DTO (DATA TRANSACTION OBJECT)

@@ -1,0 +1,35 @@
+### Testar o Parquimetro
+
+POST http://localhost:8080/pagamento
+content-type: application/json
+
+{
+  "id": 1,
+  "tiqueteId": 1,
+  "valor": 0,
+  "dataPagamento": "2023-12-13",
+  "horaEntrada": "08:30:00",
+  "horaSaida": "17:15:00",
+  "tipoPagamento": "CREDITO",
+  "periodoFixo": false,
+  "quantidadeHoras": " ",
+  "tarifaDescricao": "FIXO",
+  "status": "ABERTO",
+  "condutor": {
+    "numeroCnh": 123456789,
+    "dataNascimento": "1990-01-15",
+    "email": "condutor@example.com",
+    "sexo": "MASCULINO",
+    "CPF": 12345678901,
+    "telefone": "987654321",
+    "endereco": {
+        "rua": "Rua da Amostra",
+        "numero": 123,
+        "bairro": "Centro",
+        "cidade": "Cidade",
+        "estado": "UF",
+        "pais": "Brasil",
+        "cep": 12345678
+    }
+  }
+}
