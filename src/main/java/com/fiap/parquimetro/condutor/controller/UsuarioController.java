@@ -1,6 +1,7 @@
 package com.fiap.parquimetro.condutor.controller;
 
 import java.net.URI;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +22,6 @@ import com.fiap.parquimetro.condutor.DTO.AtualizarUsuarioDTO;
 import com.fiap.parquimetro.condutor.entity.Usuario;
 import com.fiap.parquimetro.condutor.service.CadastroUsuarioService;
 
-
 @RestController
 @RequestMapping(value = "/usuarios")
 public class UsuarioController {
@@ -29,6 +29,11 @@ public class UsuarioController {
     @Autowired
     CadastroUsuarioService usuarioService;
     private static final Logger LOGGER = LoggerFactory.getLogger(UsuarioController.class);
+    
+    @GetMapping
+    public ResponseEntity<List<Usuario>> buscarUsuarios() {
+        return ResponseEntity.ok().body(usuarioService.buscarUsuarios());
+    }
 
     @PostMapping
     public ResponseEntity<Usuario> inserirUsuario(@RequestBody Usuario Usuario, UriComponentsBuilder builder) {

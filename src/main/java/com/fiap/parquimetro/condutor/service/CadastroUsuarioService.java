@@ -1,5 +1,7 @@
 package com.fiap.parquimetro.condutor.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,11 @@ public class CadastroUsuarioService {
     public Usuario inserirUsuario(Usuario usuario) {
         return usuarioRepository.save(usuario);
     }
+
+    //read all
+    public List<Usuario> buscarUsuarios() {
+        return usuarioRepository.findAll();
+    } 
 
     //read
     public Usuario encontrarUsuario(Long id) {

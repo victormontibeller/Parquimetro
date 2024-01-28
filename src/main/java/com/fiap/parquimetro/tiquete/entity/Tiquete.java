@@ -1,12 +1,14 @@
 package com.fiap.parquimetro.tiquete.entity;
 
-import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fiap.parquimetro.condutor.entity.Condutor;
-import com.fiap.parquimetro.preco.entity.Preco;
+import com.fiap.parquimetro.pagamento.entity.Pagamento;
+import com.fiap.parquimetro.pagamento.entity.TipoPagamentoEnum;
+import com.fiap.parquimetro.pagamento.entity.listaPrecosEnum;
 import com.fiap.parquimetro.tiquete.entity.enumerations.StatusTiqueteEnum;
-import com.fiap.parquimetro.tiquete.entity.enumerations.TipoTiqueteEnum;
 import com.fiap.parquimetro.veiculo.entity.Veiculo;
 
 import jakarta.persistence.Column;
@@ -18,6 +20,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -41,24 +45,30 @@ public class Tiquete {
     @JoinColumn(name = "veiculo_id")
     private Veiculo veiculo;
 
-    @Column(nullable = false)
-    private LocalDateTime entrada;
+//    @Column(nullable = false)
+    private LocalTime entrada;
 
-    private LocalDateTime saida;
+    private LocalTime saida;
 
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private TipoTiqueteEnum tipo;
+//    @Column(nullable = false)
+//    @Enumerated(EnumType.STRING)
+    private String tipoPagamento;
 
-    @Column(nullable = false)
-    @Enumerated(EnumType.ORDINAL)
-    private TipoTiqueteEnum periodo;
+//    @Column(nullable = false, length = 255)
+    private String descricaoTarifa;
 
-    @Column(nullable = false)
-    private Preco preco;
+    @Column(nullable = false, length = 255)
+    private String periodo;
 
-    @Column(nullable = false)
+//    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private StatusTiqueteEnum status;
+
+//    @ManyToOne
+//    @JoinColumn(name = "preco_id")
+    private String preco;
+
+    @OneToOne(mappedBy = "tiquete")
+    private Pagamento pagamentos;
 
 }

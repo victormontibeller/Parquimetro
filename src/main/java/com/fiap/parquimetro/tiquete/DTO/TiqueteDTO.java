@@ -1,23 +1,16 @@
 package com.fiap.parquimetro.tiquete.DTO;
 
-import com.fiap.parquimetro.condutor.DTO.CondutorDTO;
-import com.fiap.parquimetro.preco.DTO.PrecoDTO;
-import com.fiap.parquimetro.tiquete.entity.enumerations.StatusTiqueteEnum;
-import com.fiap.parquimetro.tiquete.entity.enumerations.TipoTiqueteEnum;
-import com.fiap.parquimetro.veiculo.DTO.VeiculoDTO;
+import java.time.LocalTime;
 
-import java.time.LocalDateTime;
+import com.fiap.parquimetro.pagamento.DTO.PagamentoDTO;
 
 public record TiqueteDTO(
-        Long id,
-        CondutorDTO condutor,
-        VeiculoDTO veiculo,
-        LocalDateTime entrada,
-        LocalDateTime saida,
-        TipoTiqueteEnum tipo,
-        TipoTiqueteEnum periodo,
-        PrecoDTO preco,
-        StatusTiqueteEnum status
+        PagamentoDTO pagamentoDTO,
+        LocalTime entrada,
+        LocalTime saida,
+        String periodo,
+        String descricaoTarifa,
+        String preco
 ) {
     
 }

@@ -34,8 +34,6 @@ public class Preco {
     private BigDecimal precoHoraExcedente;
 
     @Column(nullable = false)
-    @Enumerated(EnumType.ORDINAL)
-    private HorarioTiqueteEnum periodo;
-
+    private String periodo;
 
 }

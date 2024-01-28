@@ -1,0 +1,23 @@
+### Testar o Parquimetro
+
+POST http://localhost:8080/tiquete
+content-type: application/json
+
+{
+  "id": 1,
+  "descricao_tarifa": "FIXO",
+  "entrada": "08:30:00",
+  "periodo": "",
+  "preco":" ",
+  "saida": "17:15:00",
+  "status": "ABERTO",
+  "tipo_pagamento": "CREDITO",
+  "veiculo_id": 1
+}
+###  "valor": 10.5,
+###  "dataPagamento": "2024-01-23",
+###  "horaEntrada": "10:00:00",
+###  "horaSaida": "12:00:00",
+###  "tipoPagamento": "CREDITO",
+###  "quantidadeHoras": "",
+###  "tarifaDescricao": "FIXO",
