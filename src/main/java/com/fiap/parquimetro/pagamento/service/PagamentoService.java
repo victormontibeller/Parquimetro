@@ -13,6 +13,7 @@ import com.fiap.parquimetro.pagamento.entity.listaPrecosEnum;
 import com.fiap.parquimetro.pagamento.repository.PagamentoRepository;
 import com.fiap.parquimetro.tiquete.entity.Tiquete;
 import com.fiap.parquimetro.tiquete.entity.enumerations.StatusTiqueteEnum;
+import com.fiap.parquimetro.tiquete.repository.TiqueteRepository;
 
 import lombok.NonNull;
 
@@ -21,6 +22,9 @@ public class PagamentoService {
 
     @Autowired
     private PagamentoRepository pagamentoRepository;
+
+    @Autowired
+    private TiqueteRepository tiqueteRepository;
 
     //create
     public PagamentoDTO inserirPagamento(PagamentoDTO pagamentoDTO, 
@@ -31,7 +35,8 @@ public class PagamentoService {
         }
 
         calcularInformacoesPagamento(pagamento);
-            Tiquete tiquete = preencherTiquete(pagamento);
+        Tiquete tiquete = preencherTiquete(pagamento);
+        tiqueteRepository.save(tiquete);
 
         pagamento = pagamentoRepository.save(pagamento);
 
@@ -83,7 +88,6 @@ public class PagamentoService {
     public PagamentoDTO toDTO(Pagamento pagamento){
         return new PagamentoDTO(
             pagamento.getId(), 
-            pagamento.getTiquete().getId(), 
             pagamento.getValor(), 
             pagamento.getDataPagamento(), 
             pagamento.getHoraEntrada(), 
@@ -91,7 +95,7 @@ public class PagamentoService {
             pagamento.getTipoPagamento(), 
             pagamento.getQuantidadeHoras(), 
             pagamento.getTarifaDescricao(),
-            pagamento.getCondutor(),
+            pagamento.getCondutor(),       
             pagamento.getDadosCartao(), 
             pagamento.getTiquete()
             );

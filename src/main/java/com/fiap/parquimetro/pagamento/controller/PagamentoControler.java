@@ -59,7 +59,7 @@ public class PagamentoControler {
      */
     @PostMapping
     public ResponseEntity<PagamentoDTO> inserirPagamento(@RequestBody PagamentoDTO pagamentoDTO) throws Exception {
-        PagamentoDTO pagamentoSalvo = pagamentoService.inserirPagamento(pagamentoDTO, pagamentoDTO.tiqueteId());
+        PagamentoDTO pagamentoSalvo = pagamentoService.inserirPagamento(pagamentoDTO, 0L);
 
         return new ResponseEntity<>(pagamentoSalvo, HttpStatus.CREATED);
     }

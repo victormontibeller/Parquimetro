@@ -9,7 +9,7 @@ import com.fiap.parquimetro.tiquete.entity.Tiquete;
 
 public record PagamentoDTO(
         Long id,
-        Long tiqueteId,
+//        Long tiqueteId,
         Float valor,
         LocalDate dataPagamento,
         LocalTime horaEntrada,
