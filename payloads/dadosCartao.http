@@ -4,8 +4,7 @@
 POST http://localhost:8080/cartao
 content-type: application/json
 
-{
-    "dadosCartao": {   
+{   
     "cartaoId": 123,
     "nome": "Nome do Titular",
     "sobrenome": "Sobrenome do Titular",
